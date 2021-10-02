@@ -21,6 +21,14 @@ module.exports = {
         },
       },
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+        ],
+      },
+      {
         test: /\.(s*)css$/,
         use: [
           {
@@ -31,10 +39,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.html$/,
-        use: {
-          loader: 'html-loader',
-        },
+        test: /\.(png|gif|jpg)$/,
+        use: [
+          {
+            'loader': 'file-loader',
+            options: {
+              name: 'assets/[hash].[ext]',
+            },
+          },
+        ],
       },
     ],
   },
