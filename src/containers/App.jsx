@@ -1,4 +1,5 @@
 import React from 'react';
+import useInitialState from '../hooks/useInitialState';
 
 import Header from '../components/Header';
 import Search from '../components/Search';
@@ -9,31 +10,47 @@ import Footer from '../components/Footer';
 
 import '../assets/styles/App.scss';
 
-const App = () => (
-  <div className='app'>
-    <Header />
-    <Search />
+const API = 'http://localhost:3000/initialState';
 
-    <Categories title='Tendencias'>
-      <Carousel>
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-      </Carousel>
-    </Categories>
+const App = () => {
+  const initialState = useInitialState(API);
 
-    <Categories title='Originales de Platzi vídeo'>
-      <Carousel>
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-      </Carousel>
-    </Categories>
+  return (
+    <div className='app'>
+      <Header />
+      <Search />
 
-    <Footer />
-  </div>
-);
+      {
+        initialState.mylist?.length > 0 && (
+          <Categories title='Mi lista'>
+            <Carousel>
+              {
+                initialState.mylist.map((item) => <CarouselItem key={item.id} />)
+              }
+            </Carousel>
+          </Categories>
+        )
+      }
+
+      <Categories title='Tendencias'>
+        <Carousel>
+          {
+            initialState.trends?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+          }
+        </Carousel>
+      </Categories>
+
+      <Categories title='Originales de Platzi vídeo'>
+        <Carousel>
+          {
+            initialState.originals?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+          }
+        </Carousel>
+      </Categories>
+
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
