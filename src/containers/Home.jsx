@@ -1,12 +1,10 @@
 import React from 'react';
 import useInitialState from '../hooks/useInitialState';
 
-import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
-import Footer from '../components/Footer';
 
 import '../assets/styles/App.scss';
 
@@ -17,7 +15,6 @@ const Home = () => {
 
   return (
     <div className='app'>
-      <Header />
       <Search />
 
       {
@@ -47,8 +44,6 @@ const Home = () => {
           }
         </Carousel>
       </Categories>
-
-      <Footer />
     </div>
   );
 };
