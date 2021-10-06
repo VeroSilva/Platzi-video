@@ -1,5 +1,5 @@
 import React from 'react';
-import useInitialState from '../hooks/useInitialState';
+import { connect } from 'react-redux';
 
 import Search from '../components/Search';
 import Categories from '../components/Categories';
@@ -8,31 +8,23 @@ import CarouselItem from '../components/CarouselItem';
 
 import '../assets/styles/App.scss';
 
-const API = 'http://localhost:3000/initialState';
-
-const Home = () => {
-  const initialState = useInitialState(API);
-
+const Home = ({ mylist, trends, originals }) => {
   return (
     <div className='app'>
       <Search />
 
-      {
-        initialState.mylist?.length > 0 && (
-          <Categories title='Mi lista'>
-            <Carousel>
-              {
-                initialState.mylist.map((item) => <CarouselItem key={item.id} />)
-              }
-            </Carousel>
-          </Categories>
-        )
-      }
+      <Categories title='Mi lista'>
+        <Carousel>
+          {
+            mylist?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+          }
+        </Carousel>
+      </Categories>
 
       <Categories title='Tendencias'>
         <Carousel>
           {
-            initialState.trends?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+            trends?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
           }
         </Carousel>
       </Categories>
@@ -40,7 +32,7 @@ const Home = () => {
       <Categories title='Originales de Platzi vídeo'>
         <Carousel>
           {
-            initialState.originals?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+            originals?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
           }
         </Carousel>
       </Categories>
@@ -48,4 +40,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    mylist: state.mylist,
+    trends: state.trends,
+    originals: state.originals,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);
