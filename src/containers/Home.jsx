@@ -16,7 +16,7 @@ const Home = ({ mylist, trends, originals }) => {
       <Categories title='Mi lista'>
         <Carousel>
           {
-            mylist?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+            mylist?.map((item) => <CarouselItem key={item.id} id={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
           }
         </Carousel>
       </Categories>
@@ -24,7 +24,7 @@ const Home = ({ mylist, trends, originals }) => {
       <Categories title='Tendencias'>
         <Carousel>
           {
-            trends?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+            trends?.map((item) => <CarouselItem key={item.id} id={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
           }
         </Carousel>
       </Categories>
@@ -32,7 +32,7 @@ const Home = ({ mylist, trends, originals }) => {
       <Categories title='Originales de Platzi vídeo'>
         <Carousel>
           {
-            originals?.map((item) => <CarouselItem key={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
+            originals?.map((item) => <CarouselItem key={item.id} id={item.id} cover={item.cover} title={item.title} year={item.year} contentRating={item.contentRating} duration={item.duration} />)
           }
         </Carousel>
       </Categories>
