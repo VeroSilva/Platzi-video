@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { loginRequest } from '../actions';
 
+import Header from '../components/Header';
 import '../assets/styles/components/Login.scss';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
@@ -27,52 +28,55 @@ const Login = (props) => {
   };
 
   return (
-    <section className='login'>
-      <section className='login__container'>
-        <h2>Inicia sesión</h2>
-        <form className='login__container--form' onSubmit={handleSubmit}>
-          <input
-            name='email'
-            className='input'
-            type='text'
-            placeholder='Correo'
-            onChange={handleInput}
-          />
-          <input
-            name='password'
-            className='input'
-            type='password'
-            placeholder='Contraseña'
-            onChange={handleInput}
-          />
-          <button className='button' type='submit'>Iniciar sesión</button>
-          <div className='login__container--remember-me'>
-            <div>
-              <input type='checkbox' id='cbox1' value='first_checkbox' />
-              Recuérdame
+    <>
+      <Header isLogin />
+      <section className='login'>
+        <section className='login__container'>
+          <h2>Inicia sesión</h2>
+          <form className='login__container--form' onSubmit={handleSubmit}>
+            <input
+              name='email'
+              className='input'
+              type='text'
+              placeholder='Correo'
+              onChange={handleInput}
+            />
+            <input
+              name='password'
+              className='input'
+              type='password'
+              placeholder='Contraseña'
+              onChange={handleInput}
+            />
+            <button className='button' type='submit'>Iniciar sesión</button>
+            <div className='login__container--remember-me'>
+              <div>
+                <input type='checkbox' id='cbox1' value='first_checkbox' />
+                Recuérdame
+              </div>
+              <a href='/'>Olvidé mi contraseña</a>
             </div>
-            <a href='/'>Olvidé mi contraseña</a>
-          </div>
-        </form>
-        <section className='login__container--social-media'>
-          <div>
-            <img src={googleIcon} alt='Inicia sesión con Google' />
+          </form>
+          <section className='login__container--social-media'>
+            <div>
+              <img src={googleIcon} alt='Inicia sesión con Google' />
+              {' '}
+              Inicia sesión con Google
+            </div>
+            <div>
+              <img src={twitterIcon} alt='Inicia sesión con Twitter' />
+              {' '}
+              Inicia sesión con Twitter
+            </div>
+          </section>
+          <p className='login__container--register'>
+            No tienes ninguna cuenta
             {' '}
-            Inicia sesión con Google
-          </div>
-          <div>
-            <img src={twitterIcon} alt='Inicia sesión con Twitter' />
-            {' '}
-            Inicia sesión con Twitter
-          </div>
+            <Link to='/register'>Regístrate</Link>
+          </p>
         </section>
-        <p className='login__container--register'>
-          No tienes ninguna cuenta
-          {' '}
-          <Link to='/register'>Regístrate</Link>
-        </p>
       </section>
-    </section>
+    </>
   );
 };
 
