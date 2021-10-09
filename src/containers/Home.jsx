@@ -13,7 +13,7 @@ const Home = ({ mylist, trends, originals }) => {
   return (
     <div className='app'>
       <Header />
-      <Search />
+      <Search isHome />
       <Categories title='Mi lista'>
         <Carousel>
           {mylist?.map((item) => (
