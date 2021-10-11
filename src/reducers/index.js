@@ -1,4 +1,6 @@
 const reducer = (state, action) => {
+  const allVideos = [...state.trends, ...state.originals];
+
   switch (action.type) {
     case 'SET_FAVORITE':
       return {
@@ -38,6 +40,14 @@ const reducer = (state, action) => {
         playing: state.trends.find((item) => item.id === Number(action.payload)) ||
         state.originals.find((item) => item.id === Number(action.payload)) ||
         [],
+      };
+
+    case 'GET_VIDEO_SEARCHED':
+      if (action.payload === '') return { ...state, searchResult: [] };
+
+      return {
+        ...state,
+        searchResult: allVideos.filter((item) => item.title.toLowerCase().includes(action.payload.toLowerCase())),
       };
 
     default:

@@ -9,27 +9,57 @@ import Header from '../components/Header';
 
 import '../assets/styles/App.scss';
 
-const Home = ({ mylist, trends, originals }) => {
+const Home = ({ mylist, trends, originals, searchResult }) => {
   return (
     <div className='app'>
       <Header />
       <Search isHome />
-      <Categories title='Mi lista'>
-        <Carousel>
-          {mylist?.map((item) => (
-            <CarouselItem
-              key={item.id}
-              id={item.id}
-              cover={item.cover}
-              title={item.title}
-              year={item.year}
-              contentRating={item.contentRating}
-              duration={item.duration}
-              isList
-            />
-          ))}
-        </Carousel>
-      </Categories>
+
+      {
+        searchResult.length > 0 ? (
+          <Categories title='Búsqueda'>
+            <Carousel>
+              {searchResult?.map((item) => (
+                <CarouselItem
+                  key={item.id}
+                  id={item.id}
+                  cover={item.cover}
+                  title={item.title}
+                  year={item.year}
+                  contentRating={item.contentRating}
+                  duration={item.duration}
+                  isList
+                />
+              ))}
+            </Carousel>
+          </Categories>
+        ) : (
+          ''
+        )
+      }
+
+      {
+        mylist.length > 0 ? (
+          <Categories title='Mi lista'>
+            <Carousel>
+              {mylist?.map((item) => (
+                <CarouselItem
+                  key={item.id}
+                  id={item.id}
+                  cover={item.cover}
+                  title={item.title}
+                  year={item.year}
+                  contentRating={item.contentRating}
+                  duration={item.duration}
+                  isList
+                />
+              ))}
+            </Carousel>
+          </Categories>
+        ) : (
+          ''
+        )
+      }
 
       <Categories title='Tendencias'>
         <Carousel>
@@ -55,6 +85,7 @@ const mapStateToProps = (state) => {
     mylist: state.mylist,
     trends: state.trends,
     originals: state.originals,
+    searchResult: state.searchResult,
   };
 };
 
